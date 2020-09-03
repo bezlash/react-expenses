@@ -11,9 +11,11 @@ const ExpenseSummary = (props) => (
 )
 
 const mapStateToProps = (state) => {
+  const visibleExpenses = selectExpenses(state.expenses, state.filters);
+  
   return {
-    expenses: selectExpenses(state.expenses, state.filters),
-    total: expensesTotal(state.expenses)
+    expenses: visibleExpenses,
+    total: expensesTotal(visibleExpenses)
   };
 }
 
