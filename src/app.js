@@ -5,7 +5,7 @@ import AppRouter from './routers/AppRouter';
 import configureStore from './store/consfigureStore'
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
-import { addExpense } from './actions/expenses';
+import { startSetExpenses } from './actions/expenses';
 import { setTextFilter } from './actions/filters';
 import getVisibleExpenses from './selectors/expenses';
 import './firebase/firebase';
@@ -22,11 +22,15 @@ const jsx = (
   </Provider>
 )
 
-store.dispatch(addExpense({description: 'Water bill', amount: 4500}));
-store.dispatch(addExpense({description: 'Gas bill', createdAt:1596240000}));
-store.dispatch(addExpense({description: 'Rent', amount: 109500}));
+// store.dispatch(addExpense({description: 'Water bill', amount: 4500}));
+// store.dispatch(addExpense({description: 'Gas bill', createdAt:1596240000}));
+// store.dispatch(addExpense({description: 'Rent', amount: 109500}));
 
+ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 
-ReactDOM.render(jsx, document.getElementById('app'));
+store.dispatch(startSetExpenses()).then(() => {
+  ReactDOM.render(jsx, document.getElementById('app'));
+});
+
 
 
